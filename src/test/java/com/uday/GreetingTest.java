@@ -1,7 +1,6 @@
 package com.uday;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,10 +8,15 @@ class GreetingTest {
 
     private Greeting greeting;
 
+    @BeforeAll
+    public static void beforeClass(){
+        System.out.println("Before - I am only called Once!!!");
+    }
+
     @BeforeEach
-    void setUp(){
-        greeting=new Greeting();
-        System.out.println("Calling @BeforeEach annotated method");
+    void setUp() {
+        System.out.println("In Before Each....");
+        greeting = new Greeting();
     }
 
     @Test
@@ -22,6 +26,21 @@ class GreetingTest {
 
     @Test
     void helloWorld1() {
-        System.out.println(greeting.helloWorld("Junit 5 Testing"));
+        System.out.println(greeting.helloWorld("John"));
+    }
+
+    @Test
+    void helloWorld2() {
+        System.out.println(greeting.helloWorld("Sam"));
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("In After Each........");
+    }
+
+    @AfterAll
+    public static void afterClass(){
+        System.out.println("After!!! ***** - I am only called Once!!!");
     }
 }
